@@ -1,0 +1,46 @@
+---------------------- Test fonctionnels:
+
+- Verification de l'interface utilisateur
+- La base de données 
+- Les API
+- Les application client/serveur
+- les fonctionnalités et la sécurité du logiciel testé
+
+
+DIFFERENTS TYPES DE TESTS FONCTIONNELS:
+
+* Test Unitaire
+* Test 'd'Intégration (2 types: composants et systèmes)
+* Test de système
+* Test d'intégrité
+* Test de fumée
+* Test d'interface
+* Test de régression
+
+-----------------Test non fonctionnels:
+
+DIFFERENTS TYPES DE TESTS NON FONCTIONNELS:
+
+** Test de performance
+** Test de charge
+** Test d'acceptation
+** Test de volume
+** Test de sécurité
+** Test de compatibilité
+** Test d'installation
+** Test de fiabilité
+** Test d'utilisabilité
+** Test de conformité
+** Test de localisation
+
+
+Definition simplifiée: Tester une application c'est de réaliser un programme pour y trouver des defauts
+
+
+
+
+""""""""""""""""""""""""""""" TUTORIEL """"""""""""""""""""""""""""
+
+Cypress Installation:
+NodeJS and NPM
+Visual Studio Code
