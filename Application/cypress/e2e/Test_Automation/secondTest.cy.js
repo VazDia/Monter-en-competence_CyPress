@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 // On pouvait egalement importer seulement que les methode de la classe TodoPage ce qui nous éviterais de faire une instanciation de celle-ci
-import { TodoPage } from "../../PageObject/todoPage"
+import { TodoPage }     from "../../PageObject/todoPage"
 
 describe("Mon deuxième Test",()=>{
     const todoPage = new TodoPage

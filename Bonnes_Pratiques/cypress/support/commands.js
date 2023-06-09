@@ -51,4 +51,3 @@ Cypress.Commands.add('openNewTab',(url)=>{
     windows.open(url, '_blank');
 })
 
-// cy.get('.p-dropdown-label')

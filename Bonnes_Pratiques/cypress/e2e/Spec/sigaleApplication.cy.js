@@ -10,112 +10,112 @@ import { Home }             from "../Page Object Model/Sigale/home";
 
 /*----------------------------------------------- PARCOURS APPLICATION ------------------------------- */
 
-describe('Application Sigale',{ viewportWidth: 1920, viewportHeight: 1080 }, () => {
+const application           =       "Sigale"
+
+describe( application ,{ viewportWidth: 1920, viewportHeight: 1080 }, () => {
 
     // Variables Globales
 
-    const menu            =   new Menu;
-    const article         =   new Article;
-    const accueil         =   new Home;
-    var   sIdentifiant    =   'Obina';
-    var   sMotDePasse     =   'Ryan';
+    const menu                  =       new Menu;
+    const article               =       new Article;
+    const accueil               =       new Home;
+    var   sIdentifiant          =       'Obina';
+    var   sMotDePasse           =       'Ryan';
    
     // Aceder à l'application
 
-    describe('Ouvrir application',()=>{
-
-        it( 'Acces URL', () => {
+        it( application + ' - open', () => {
             cy.openUrl('https://app-releve-admin-hors-prod.azurewebsites.net/#/home')
         })
-    })
+
 
     // Se connecter sur l'application
 
-    describe('Connexion (coordonnées incorrectes)', () => {
-
-        it('Connexion-Echouée', () => {
+    describe('Connexion[USER] ', () => {
+        let sLabel = " "
+        it('Login( '+ sIdentifiant+' , '+sMotDePasse +' ) - Failed', () => {
             cy.login(sIdentifiant,sMotDePasse);
-            cy.get('.text-danger').should('not.exist')
         })
 
-    })
+        it('Error Message- Is Visible',()=>{
+            accueil.loginErrorMessage().should('be.visible')
+        })
 
-    describe('Connexion (Coordonnées correctes)', () => {
-
-        it('Connexion-réussie',()=>{
+        it('Login( '+ Cypress.env('identifiant') +' , '+ Cypress.env('motDePasse') +' ) - Success',()=>{
             cy.login(Cypress.env('identifiant'),Cypress.env('motDePasse'));
         })
-
     })
 
-    describe('Page - [Accueil] ', () =>{
+    describe('Page[Accueil] >', () =>{
 
-        it('Selectionner Magazin', () => {
+        it('Welcome Message - Is Visible',()=>{
+          accueil.homePageWelcomeLabel().should('be.visible')
+        })
+        it('SelectBox[MAGASIN] - Click', () => {
             accueil.selectionMgazin().click()
-            accueil.optionMagazin().eq(3).click()
         })
 
-        it('Accès aux articles', () => {
+        it('SelectBox[MAGAZIN] - Option[CREMERIE] - Click',()=>{
+            accueil.optionMagazin().eq(3).click()
+        })
+        
+    })
+
+    describe('Page[Articles] >', () => {
+
+        it('Menu[ARTICLES] - Click', () => {
             var sNomPage = 'Articles'
             menu.click(sNomPage)
         })
         
-    })
-
-    describe('Page - [Articles]', () => {
-
-        it('Selection Article',() => {
+        it('Groupe Article[7] - Click',() => {
             article.selectArticle().eq(6).click()
         })
         
-        it('Scroller Page en Haut', () =>{
+        it('ScrollBar[TOP]', () =>{
             cy.slowScrollTo('top')
         })
 
-        describe('Modification -[option]', () => {
+        describe('Modification[GROUPE ARTICLE]', () => { 
 
-            it('Cliquer bouton - [Modifier] ', () => {
+            var   sDesignation     =   'Comité AOP';
+            var   sInstruction     =   'Instructions grand frais';
+
+            it('Button[Modifier] - Is  Visible', () => {
+                article.buttonModifier().should('be.visible')
+            })
+
+            it('Button[Modifier] - Click ', () => {
                 article.buttonModifier().click()
             })
-
-            describe('Modier champs', () => {
-                
-                var   designation     =   'Comité AOP';
-                var   instruction     =   'Instructions grand frais';
-            
-                it('champ - [designation]', ()=>{
-                    article.inputTextDesignationPersonnalisee().invoke('val')
-                    article.inputTextDesignationPersonnalisee().clear()
-                    article.inputTextDesignationPersonnalisee().type(designation);
-                })
-
-                it('champ - [Instruction]', ()=>{
-                    article.inputTextInstruction().invoke('val');
-                    article.inputTextInstruction().clear()
-                    article.inputTextInstruction().type(instruction);
-                })
-                
+        
+            it('Input Field[DESIGNATION] - Type[ '+sDesignation+ ' ])' , ()=>{
+                article.inputTextDesignationPersonnalisee().invoke('val')
+                article.inputTextDesignationPersonnalisee().clear()
+                article.inputTextDesignationPersonnalisee().type(sDesignation);
             })
-            
-            describe('Modifier categorie',()=>{
 
-                it('Cliquer bouton - [categorie]',()=>{
-                    article.selectCategorie().click()
-                })
+            it('Input Field[INSTRUCTION] - Type[ '+sInstruction+ ' ])', ()=>{
+                article.inputTextInstruction().invoke('val');
+                article.inputTextInstruction().clear()
+                article.inputTextInstruction().type(sInstruction);
+            })
 
-                it('Choisir catégorie',()=>{
-                    article.selectCategorieOption().eq(4).click()
-                })
-                
+            it('SelectBox[CATEGORIE] - Click',()=>{
+                article.selectCategorie().click()
+            })
+
+            it('SelectBox[CATEGORIE] - Option[] -Click',()=>{
+                article.selectCategorieOption().eq(4).click()
             })
 
             describe('enregistrement',()=>{
 
-                it('Visibilité bouton - [Enregistrer]',()=>{
+                it('button[Enregistrer] - Is Visible',()=>{
                     article.buttonEnregistrer().should('be.visible')
                 })
 
-                it ('Cliquer button - [Enregistrer]', ()=>{
+                it ('Button[Enregistrer] - Click', ()=>{
                     article.buttonEnregistrer().click()
                 })
 
@@ -125,9 +125,9 @@ describe('Application Sigale',{ viewportWidth: 1920, viewportHeight: 1080 }, () 
 
     })
 
-    describe('Deconnexion utilisateur',()=>{
+    describe('Deconnexion',()=>{
 
-        it('Deconnecté',()=>{
+        it('Deconnexion[USER]',()=>{
             cy.logout()
         })
     })

@@ -31,7 +31,6 @@ describe("Travailler avec des listes sur le site d'exemple cypress",()=>{
                 top:700,
                 behavior:'smooth'
             })
-            
         })
         // Scroller l'element:nth-child(5) > pre > .javascript à droite
         cy.get(':nth-child(5) > pre > .javascript').scrollTo("right",{ duration: 2000 })
