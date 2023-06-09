@@ -46,7 +46,7 @@ describe( application ,{ viewportWidth: 1920, viewportHeight: 1080 }, () => {
         })
     })
 
-    describe('Page[Accueil] >', () =>{
+    describe('Page[ACCUEIL] >', () =>{
 
         it('Welcome Message - Is Visible',()=>{
           accueil.homePageWelcomeLabel().should('be.visible')
@@ -61,7 +61,7 @@ describe( application ,{ viewportWidth: 1920, viewportHeight: 1080 }, () => {
         
     })
 
-    describe('Page[Articles] >', () => {
+    describe('Page[ARTICLES] >', () => {
 
         it('Menu[ARTICLES] - Click', () => {
             var sNomPage = 'Articles'
@@ -81,11 +81,11 @@ describe( application ,{ viewportWidth: 1920, viewportHeight: 1080 }, () => {
             var   sDesignation     =   'Comité AOP';
             var   sInstruction     =   'Instructions grand frais';
 
-            it('Button[Modifier] - Is  Visible', () => {
+            it('Button[MODIFIER] - Is  Visible', () => {
                 article.buttonModifier().should('be.visible')
             })
 
-            it('Button[Modifier] - Click ', () => {
+            it('Button[MODIFIER] - Click ', () => {
                 article.buttonModifier().click()
             })
         
@@ -105,17 +105,17 @@ describe( application ,{ viewportWidth: 1920, viewportHeight: 1080 }, () => {
                 article.selectCategorie().click()
             })
 
-            it('SelectBox[CATEGORIE] - Option[] -Click',()=>{
+            it('SelectBox[CATEGORIE] - Option[MONT D\'OR] -Click',()=>{
                 article.selectCategorieOption().eq(4).click()
             })
 
             describe('enregistrement',()=>{
 
-                it('button[Enregistrer] - Is Visible',()=>{
+                it('button[ENREGISTRER] - Is Visible',()=>{
                     article.buttonEnregistrer().should('be.visible')
                 })
 
-                it ('Button[Enregistrer] - Click', ()=>{
+                it ('Button[ENREGISTRER] - Click', ()=>{
                     article.buttonEnregistrer().click()
                 })
 
